@@ -32,72 +32,72 @@ source("scripts/genes_vs_repeats.R")
 # source("scripts/genes_vs_repeats.R")
 
 ### determine the closer GGAA, weather informatic or experimental
-closest_left_repeat_ID = vector()
-closest_left_distance = vector()
-closest_right_repeat_ID = vector()
-closest_right_distance = vector() #create vectors to store data
-for (counter6 in 1:dim(genes_dataset_all)[1]) {
-  row_evaluated = genes_dataset_all[counter6,]
-  if (is.na(row_evaluated$left_exp_repeat_distance)) { # if a value is NA and the script crashes
-    row_evaluated$left_exp_repeat_distance = 1000000000000
-  } 
-  if (is.na(row_evaluated$left_inf_repeat_distance)) {
-    row_evaluated$left_inf_repeat_distance = 1000000000000
-  }
-  if (is.na(row_evaluated$right_exp_repeat_distance)) { # if a value is NA and the script crashes
-    row_evaluated$right_exp_repeat_distance = 1000000000000
-  } 
-  if (is.na(row_evaluated$right_inf_repeat_distance)) {
-    row_evaluated$right_inf_repeat_distance = 1000000000000
-  }
-  
-  if (row_evaluated$left_exp_repeat_distance <  row_evaluated$left_inf_repeat_distance) {
-    closest_left_repeat_ID[counter6] =  row_evaluated$left_exp_repeat_ID
-    closest_left_distance[counter6] =  row_evaluated$left_exp_repeat_distance
-  } else {
-    closest_left_repeat_ID[counter6] =  row_evaluated$left_inf_repeat_ID
-    closest_left_distance[counter6] =  row_evaluated$left_inf_repeat_distance
-  }
-  if (row_evaluated$right_exp_repeat_distance <  row_evaluated$right_inf_repeat_distance) {
-    closest_right_repeat_ID[counter6] =  row_evaluated$right_exp_repeat_ID
-    closest_right_distance[counter6] =  row_evaluated$right_exp_repeat_distance
-  } else {
-    closest_right_repeat_ID[counter6] =  row_evaluated$right_inf_repeat_ID
-    closest_right_distance[counter6] =  row_evaluated$right_inf_repeat_distance
-  }
-}
-
-genes_dataset_all$closest_left_repeat_ID = closest_left_repeat_ID
-genes_dataset_all$closest_left_distance = as.integer(closest_left_distance)
-genes_dataset_all$closest_right_repeat_ID = closest_right_repeat_ID
-genes_dataset_all$closest_right_distance = as.integer(closest_right_distance)
-
-write_xlsx(genes_dataset_all,"results/tables/genes_near_promoter_TF_up_AsiEF.xlsx") #store in a txt file. CHANGE FILE TO STORE OUTPUT
-print(head(genes_dataset_all))
-
-closest_distance = vector()
-closest_repeat_ID = vector()
-for (counter7 in 1:dim(genes_dataset_all)[1]) {
-  row_evaluated_2 = genes_dataset_all[counter7,]
-  
-  if (is.na(row_evaluated_2$closest_left_distance)) { # if a value is NA and the script crashes
-    row_evaluated_2$closest_left_distance = 1000000000000
-  } 
-  if (is.na(row_evaluated_2$closest_right_distance)) {
-    row_evaluated_2$closest_right_distance = 1000000000000
-  }
-
-  if (row_evaluated_2$closest_left_distance < row_evaluated_2$closest_right_distance) {
-    closest_repeat_ID[counter7] = row_evaluated_2$closest_left_repeat_ID
-        closest_distance[counter7] = row_evaluated_2$closest_left_distance
-  } else {
-    closest_repeat_ID[counter7] = row_evaluated_2$closest_right_repeat_ID
-    closest_distance[counter7] = row_evaluated_2$closest_right_distance
-  }
-}
-
-genes_dataset_all$closest_repeat_ID = closest_repeat_ID
-genes_dataset_all$closest_distance = as.integer(closest_distance)
+# closest_left_repeat_ID = vector()
+# closest_left_distance = vector()
+# closest_right_repeat_ID = vector()
+# closest_right_distance = vector() #create vectors to store data
+# for (counter6 in 1:dim(genes_dataset_all)[1]) {
+#   row_evaluated = genes_dataset_all[counter6,]
+#   if (is.na(row_evaluated$left_exp_repeat_distance)) { # if a value is NA and the script crashes
+#     row_evaluated$left_exp_repeat_distance = 1000000000000
+#   } 
+#   if (is.na(row_evaluated$left_inf_repeat_distance)) {
+#     row_evaluated$left_inf_repeat_distance = 1000000000000
+#   }
+#   if (is.na(row_evaluated$right_exp_repeat_distance)) { # if a value is NA and the script crashes
+#     row_evaluated$right_exp_repeat_distance = 1000000000000
+#   } 
+#   if (is.na(row_evaluated$right_inf_repeat_distance)) {
+#     row_evaluated$right_inf_repeat_distance = 1000000000000
+#   }
+#   
+#   if (row_evaluated$left_exp_repeat_distance <  row_evaluated$left_inf_repeat_distance) {
+#     closest_left_repeat_ID[counter6] =  row_evaluated$left_exp_repeat_ID
+#     closest_left_distance[counter6] =  row_evaluated$left_exp_repeat_distance
+#   } else {
+#     closest_left_repeat_ID[counter6] =  row_evaluated$left_inf_repeat_ID
+#     closest_left_distance[counter6] =  row_evaluated$left_inf_repeat_distance
+#   }
+#   if (row_evaluated$right_exp_repeat_distance <  row_evaluated$right_inf_repeat_distance) {
+#     closest_right_repeat_ID[counter6] =  row_evaluated$right_exp_repeat_ID
+#     closest_right_distance[counter6] =  row_evaluated$right_exp_repeat_distance
+#   } else {
+#     closest_right_repeat_ID[counter6] =  row_evaluated$right_inf_repeat_ID
+#     closest_right_distance[counter6] =  row_evaluated$right_inf_repeat_distance
+#   }
+# }
+# 
+# genes_dataset_all$closest_left_repeat_ID = closest_left_repeat_ID
+# genes_dataset_all$closest_left_distance = as.integer(closest_left_distance)
+# genes_dataset_all$closest_right_repeat_ID = closest_right_repeat_ID
+# genes_dataset_all$closest_right_distance = as.integer(closest_right_distance)
+# 
+# write_xlsx(genes_dataset_all,"results/tables/genes_near_promoter_TF_up_AsiEF.xlsx") #store in a txt file. CHANGE FILE TO STORE OUTPUT
+# print(head(genes_dataset_all))
+# 
+# closest_distance = vector()
+# closest_repeat_ID = vector()
+# for (counter7 in 1:dim(genes_dataset_all)[1]) {
+#   row_evaluated_2 = genes_dataset_all[counter7,]
+#   
+#   if (is.na(row_evaluated_2$closest_left_distance)) { # if a value is NA and the script crashes
+#     row_evaluated_2$closest_left_distance = 1000000000000
+#   } 
+#   if (is.na(row_evaluated_2$closest_right_distance)) {
+#     row_evaluated_2$closest_right_distance = 1000000000000
+#   }
+# 
+#   if (row_evaluated_2$closest_left_distance < row_evaluated_2$closest_right_distance) {
+#     closest_repeat_ID[counter7] = row_evaluated_2$closest_left_repeat_ID
+#         closest_distance[counter7] = row_evaluated_2$closest_left_distance
+#   } else {
+#     closest_repeat_ID[counter7] = row_evaluated_2$closest_right_repeat_ID
+#     closest_distance[counter7] = row_evaluated_2$closest_right_distance
+#   }
+# }
+# 
+# genes_dataset_all$closest_repeat_ID = closest_repeat_ID
+# genes_dataset_all$closest_distance = as.integer(closest_distance)
 
 print(head(genes_dataset_all))
 
